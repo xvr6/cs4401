@@ -1,5 +1,7 @@
 # stack2
 
+Control flow hijacking
+
 ## Inital Exlporation
 
 ``` bash
